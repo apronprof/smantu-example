@@ -8,7 +8,7 @@ require(__DIR__ . '/vendor/autoload.php');
 use Core\Classes\DB;
 use Core\Classes\QueryBuilder;
 
-foreach (glob(__DIR__ . '/db/Migrations/*.php') as $file) {
+foreach (array_reverse(glob(__DIR__ . '/db/Migrations/*.php')) as $file) {
     require_once $file;
 }
 

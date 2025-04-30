@@ -4,10 +4,10 @@ namespace DB\Migrations;
 
 use Core\Classes\QueryBuilder;
 
-class CreateTableUsers
+class ACreateTableUsers
 {
     public function migrate(){
-        QueryBuilder::execute("CREATE TABLE users(id INTEGER AUTO_INCREMENT, user VARCHAR(50), PRIMARY KEY(id))");
+        QueryBuilder::execute("CREATE TABLE users(id INT AUTO_INCREMENT, username VARCHAR(255), name VARCHAR(255), password VARCHAR(255), PRIMARY KEY(id));");
     }
 
     public function rollback(){

@@ -6,17 +6,6 @@ $router = new Router;
 
 // Routes
 
-// Public routes
-//
-$router->get('', 'HomeController@index');
-// Appartements
-$router->get('/listing/{id}', 'ListingController@show');
-$router->get('/user/listing/{id}', 'ListingController@userStore');
-// Auth
-$router->get('/reg', 'AuthController@registerForm');
-$router->post('/reg', 'AuthController@register');
-$router->get('/login', 'AuthController@loginForm');
-$router->post('/login', 'AuthController@login');
 
 // Routes for authenticated users
 //
@@ -30,6 +19,18 @@ $router->group('/listing', function($router){
     // delete
     $router->post('/{id}/delete', 'ListingController@delete');
 }, [new \App\Middlewares\AuthMiddleware()]);
+
+// Public routes
+//
+$router->get('', 'HomeController@index');
+// Appartements
+$router->get('/listing/{id}', 'ListingController@show');
+$router->get('/user/listing/{id}', 'ListingController@userStore');
+// Auth
+$router->get('/reg', 'AuthController@registerForm');
+$router->post('/reg', 'AuthController@register');
+$router->get('/login', 'AuthController@loginForm');
+$router->post('/login', 'AuthController@login');
 
 // Ml service
 //

@@ -4,9 +4,9 @@ namespace App\Controllers;
 
 class ListingController extends Controller
 {
-    public function index()
+    public function show($request)
     {
         
-        return $this->response(200);
+        return $this->view('listing/show');
     }
 }
