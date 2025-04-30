@@ -1,0 +1,33 @@
+{
+    "name": "apronprof/smantu",
+    "description": "php framework",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nikita Pavlov",
+            "email": "nikita.pavlov.prof@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/console": "^6.4",
+        "rubix/ml": "^2.5",
+        "nyholm/psr7": "^1.8",
+        "psr/http-server-handler": "^1.0",
+        "psr/http-server-middleware": "^1.0",
+        "nyholm/psr7-server": "^1.1",
+        "laminas/laminas-httphandlerrunner": "^2.11",
+        "phpunit/phpunit": "^12.1",
+        "filp/whoops": "^2.18",
+        "php": ">=8.3"
+    },
+    "autoload":{
+        "psr-4":{
+            "Core\\Classes\\": "core/classes/",
+            "App\\": "app/",
+            "ML\\Trainers\\": "ml/trainers"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
