@@ -19,7 +19,7 @@ class AuthController extends Controller
         if($user != false && password_verify($password, $user['password'])){
             $_SESSION['user'] = $username;
 
-            $response = $this->response(301);
+            $response = $this->response(302);
             $response = $response->withHeader('Location', APPURL);
             return $response;
 
@@ -39,7 +39,7 @@ class AuthController extends Controller
         $password_c = trim($request->getParsedBody()['password_c']);
 
         if($password != $password_c){
-            $response = $this->response(301);
+            $response = $this->response(302);
             $response = $response->withHeader('Location', APPURL.'/reg');
             return $response;
         }
@@ -56,14 +56,14 @@ class AuthController extends Controller
         $_SESSION['user'] = $username;
         
         
-        $response = $this->response(301);
+        $response = $this->response(302);
         $response = $response->withHeader('Location', APPURL);
         return $response;
     }
 
     public function logout($request){
         unset($_SESSION['user']);
-        $response = $this->response(301);
+        $response = $this->response(302);
         $response = $response->withHeader('Location', APPURL);
         return $response;
 

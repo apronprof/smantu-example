@@ -1,8 +1,8 @@
 <?php require(PUB . 'views/header.php') ?>
 
-<h2>Новое объявление</h2>
+<h2>Нове оголошення</h2>
 <form method="POST" action="<?= APPURL ?>/listing/create">
-    <label>Заголовок: <input type="text" name="property_name" required></label><br>
+    <label>Заголовок: <input type="text" name="house_name" required></label><br>
     <label>Індекс: <input type="text" name="postcode" step="0.1" required></label><br>
     <label>Кількість кімнат: <input type="number" name="rooms" required></label><br>
     <label>Тип житла: <input type="text" name="property_type" required></label><br>

@@ -30,6 +30,32 @@ class ListingController extends Controller
         return $this->view('listing/show', ['house' => $data]);
     }
 
+    public function userStore($request){
+        $user = $request->getAttribute('username');
+        $stmt = House::prepare("
+            SELECT
+                houses.id AS house_id,
+                houses.property_name,
+                houses.price,
+                houses.property_type,
+                houses.postcode,
+                houses.num_rooms,
+                houses.user_id AS house_user_id,
+                users.id AS user_id,
+                users.username,
+                users.name
+            FROM houses
+            INNER JOIN users ON houses.user_id = users.id
+            WHERE users.username = ?
+        ");
+
+        $stmt->execute([$user]);
+        $data = array_reverse($stmt->fetchAll(\PDO::FETCH_ASSOC));
+       
+        return $this->view('listing/dashboard', ['data' => $data, 'username' => $user]);
+
+    }
+
     public function dashboard($request){
         $user = $_SESSION['user'];
         $stmt = House::prepare("
@@ -52,7 +78,7 @@ class ListingController extends Controller
         $stmt->execute([$user]);
         $data = array_reverse($stmt->fetchAll(\PDO::FETCH_ASSOC));
        
-        return $this->view('listing/dashboard', ['data' => $data]);
+        return $this->view('listing/dashboard', ['data' => $data, 'username' => $user]);
 
     }
 
@@ -60,8 +86,104 @@ class ListingController extends Controller
         return $this->view('listing/create');
     }
 
+    public function create($request){
+        $stmt = User::prepare('SELECT id FROM users where username = ?');
+        $stmt->execute([$_SESSION['user']]);
+        $user_id = $stmt->fetch(\PDO::FETCH_ASSOC)['id'];
+
+        $post = $request->getParsedBody();
+        $house_name = $post['house_name'];
+        $postcode = $post['postcode'];
+        $rooms = $post['rooms'];
+        $property_type = $post['property_type'];
+        $price = $post['price'];
+        $stmt = House::prepare("INSERT INTO houses VALUES(null, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$house_name, floatval($price), $property_type, $postcode, $rooms, $user_id]);
+
+        $response = $this->response(302);
+        $response = $response->withHeader("Location", APPURL . "/listing/dashboard");
+        return $response;
+
+
+    }
+
     public function editForm($request){
-        return $this->view('listing/edit');
+        $stmt = House::prepare("
+            SELECT
+                houses.id AS house_id,
+                houses.property_name,
+                houses.price,
+                houses.property_type,
+                houses.postcode,
+                houses.num_rooms,
+                houses.user_id AS house_user_id,
+                users.id AS user_id,
+                users.username,
+                users.name
+            FROM houses
+            INNER JOIN users ON houses.user_id = users.id
+            WHERE houses.id = ?
+        ");
+        $stmt->execute([$request->getAttribute('id')]);
+        $data = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return $this->view('listing/edit', ['house' => $data]);
+    }
+
+    public function edit($request){
+        $stmt = User::prepare('SELECT id FROM users where username = ?');
+        $stmt->execute([$_SESSION['user']]);
+        $user_id = $stmt->fetch(\PDO::FETCH_ASSOC)['id'];
+
+        $house_id = $request->getAttribute('id');
+
+        $post = $request->getParsedBody();
+        $house_name = $post['property_name'];
+        $postcode = $post['postcode'];
+        $rooms = $post['rooms'];
+        $property_type = $post['property_type'];
+        $price = $post['price'];
+
+        $stmt = House::prepare("UPDATE houses SET property_name = ?, price = ?, property_type = ?, postcode = ?, num_rooms = ? WHERE id = ? AND user_id = ?");
+        $stmt->execute([$house_name, $price, $property_type, $postcode, $rooms, $house_id, $user_id]);
+        $response = $this->response(302);
+        $response = $response->withHeader("Location", APPURL . "/listing/" . $house_id);
+        return $response;
+
+    }
+
+    public function delete($request){
+        $user = $_SESSION['user'];
+        $house_id = $request->getAttribute('id');
+        $stmt = House::prepare("
+            SELECT
+                houses.id AS house_id,
+                houses.property_name,
+                houses.price,
+                houses.property_type,
+                houses.postcode,
+                houses.num_rooms,
+                houses.user_id AS house_user_id,
+                users.id AS user_id,
+                users.username,
+                users.name
+            FROM houses
+            INNER JOIN users ON houses.user_id = users.id
+            WHERE users.username = ? AND houses.id = ?
+        ");
+
+        if($stmt->execute([$user, $house_id])){
+            
+            $stmt = House::prepare("DELETE FROM houses WHERE id = ?");
+            $stmt->execute([$house_id]);
+            $response = $this->response(302);
+            $response = $response->withHeader("Location", APPURL);
+            return $response;
+        
+        }
+        
+        
+
     }
 
 }

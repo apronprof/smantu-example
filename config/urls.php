@@ -13,7 +13,7 @@ $router->group('/listing', function($router){
     // Create
     $router->get('/dashboard', 'ListingController@dashboard');
     $router->get('/create', 'ListingController@createForm');
-    $router->post('', 'ListingController@create');
+    $router->post('/create', 'ListingController@create');
     // update
     $router->get('/{id}/edit', 'ListingController@editForm');
     $router->post('/{id}/edit', 'ListingController@edit');
@@ -27,7 +27,7 @@ $router->get('/logout', 'AuthController@logout');
 $router->get('', 'HomeController@index');
 // Appartements
 $router->get('/listing/{id}', 'ListingController@show');
-$router->get('/user/listing/{id}', 'ListingController@userStore');
+$router->get('/user/{username}', 'ListingController@userStore');
 // Auth
 $router->get('/reg', 'AuthController@registerForm');
 $router->post('/reg', 'AuthController@register');

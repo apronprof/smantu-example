@@ -1,5 +1,5 @@
 <?php require(PUB . 'views/header.php') ?>
-<h2>Last updates:</h2>
+<h2><?= $username ?>:</h2>
 <?php foreach($data as $house): ?>
     <div class="listing">
         <h3><?= $house['property_name']?></h3>
