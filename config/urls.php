@@ -11,7 +11,8 @@ $router = new Router;
 //
 $router->group('/listing', function($router){
     // Create
-    $router->get('/new', 'ListingController@createForm');
+    $router->get('/dashboard', 'ListingController@dashboard');
+    $router->get('/create', 'ListingController@createForm');
     $router->post('', 'ListingController@create');
     // update
     $router->get('/{id}/edit', 'ListingController@editForm');
@@ -19,6 +20,7 @@ $router->group('/listing', function($router){
     // delete
     $router->post('/{id}/delete', 'ListingController@delete');
 }, [new \App\Middlewares\AuthMiddleware()]);
+$router->get('/logout', 'AuthController@logout');
 
 // Public routes
 //
@@ -37,7 +39,7 @@ $router->post('/login', 'AuthController@login');
 $router->get('/predict', 'MlController@predict');
 
 // Handling error 404
-$router->_404('IndexController@_404');
+//$router->_404('IndexController@_404');
 
 // End
 return $router;

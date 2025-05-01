@@ -1,17 +1,19 @@
-<?= require(PUB . 'views/header.php') ?>
-<h2>2-комнатная в центре</h2>
-
+<?php require(PUB . 'views/header.php') ?>
+<h2><?= $house['property_name']?></h2>
 <ul>
-    <h3>Appartements</h3>
-    <p><strong>City:</strong> London</p>
-    <p><strong>Cost:</strong> 12 500 000 </p>
-    <p><strong>Estimated cost:</strong> 12 800 000 </p>
-</ul>
+        <p><strong>City:</strong> London</p>
+        <p><strong>Ціна:</strong><?= $house['price']?></p>
+        <p><strong>Тип житла:</strong><?= $house['property_type']?></p>
+        <p><strong>Індекс:</strong><?= $house['postcode']?></p>
+        <p><strong>Кількість кімнат:</strong><?= $house['num_rooms']?></p>
 
-<a href="edit.html">Редактировать</a>
+</ul>
+<?php if(isset($_SESSION['user']) && $_SESSION['user'] == $house['username']): ?>
+<a href="<?= APPURL . "/listing/" . $house['house_id']?>/edit">Редактировать</a>
 <form method="POST" action="#">
     <input type="hidden" name="_method" value="DELETE">
     <button type="submit">Удалить</button>
 </form>
+<?php endif; ?>
 
-<?= require(PUB . 'views/footer.php') ?>
+<?php require(PUB . 'views/footer.php') ?>

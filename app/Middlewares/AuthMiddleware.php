@@ -13,8 +13,8 @@ class AuthMiddleware extends Middleware implements MiddlewareInterface
     {
         if (!$this->isAuthorized($request)) {
             $response = $this->getResponse();
-            return $response->createResponse(401)
-                           ->withBody($response->createStream('Unauthorized'));
+            return $response->createResponse(301)
+                            ->withHeader('Location', APPURL . "/login");
         }
 
         // Передаем дальше, если всё хорошо

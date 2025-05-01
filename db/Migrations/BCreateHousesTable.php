@@ -11,7 +11,7 @@ class BCreateHousesTable
     {
         QueryBuilder::execute("CREATE TABLE `houses` (
           `id` int(11) NOT NULL AUTO_INCREMENT,
-          `name` varchar(255) NOT NULL,
+          `property_name` varchar(255) NOT NULL,
           `price` float NOT NULL,
           `property_type` varchar(1) NOT NULL,
           `postcode` varchar(10) NOT NULL,

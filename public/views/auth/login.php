@@ -1,4 +1,4 @@
-<?= require(PUB . 'views/header.php') ?>
+<?php require(PUB . 'views/header.php') ?>
 
 <h2>Вход</h2>
 <form method="POST" action="#">
@@ -7,4 +7,4 @@
     <button type="submit">Войти</button>
 </form>
 
-<?= require(PUB . 'views/footer.php') ?>
+<?php require(PUB . 'views/footer.php') ?>

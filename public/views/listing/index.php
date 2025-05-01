@@ -1,20 +1,17 @@
-<?= require(PUB . 'views/header.php') ?>
+<?php require(PUB . 'views/header.php') ?>
+
 <h2>Last updates:</h2>
+<?php foreach($data as $house): ?>
+    <div class="listing">
+        <h3><?= $house['property_name']?></h3>
+        <p><strong>City:</strong> London</p>
+        <p><strong>Ціна:</strong><?= $house['price']?></p>
+        <p><strong>Тип житла:</strong><?= $house['property_type']?></p>
+        <p><strong>Індекс:</strong><?= $house['postcode']?></p>
+        <p><strong>Кількість кімнат:</strong><?= $house['num_rooms']?></p>
+        <a href="<?= APPURL . "/listing/" . $house['house_id']?>">Більше</a>
+    </div>
+    <br />
+<?php endforeach; ?>
 
-<div class="listing">
-    <h3>Appartements</h3>
-    <p><strong>City:</strong> London</p>
-    <p><strong>Cost:</strong> 12 500 000 </p>
-    <p><strong>Estimated cost:</strong> 12 800 000 </p>
-    <a href="listing.html">More</a>
-</div>
-<br />
-<div class="listing">
-    <h3>Appartements</h3>
-    <p><strong>City:</strong> London</p>
-    <p><strong>Cost:</strong> 12 500 000 </p>
-    <p><strong>Estimated cost:</strong> 12 800 000 </p>
-    <a href="listing.html">More</a>
-</div>
-
-<?= require(PUB . 'views/footer.php') ?>
+<?php require(PUB . 'views/footer.php') ?>

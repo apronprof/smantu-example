@@ -12,8 +12,9 @@
             <nav>
                 <a href="<?= APPURL ?>">Головна</a>
                 <?php if (isset($_SESSION['user'])): ?>
-                    <a href="/dashboard">Мої оголошення</a>
-                    <a href="<?= $config['app']['url'] ?>logout">Вийти</a>
+                    <a href="<?= APPURL ?>/listing/dashboard">Мої оголошення</a>
+                    <a href="<?= APPURL ?>/listing/create">Нове оголошення</a>
+                    <a href="<?= APPURL ?>/logout">Вийти</a>
                 <?php else: ?>
                     <a href="<?= APPURL ?>/login">Увійти</a>
                     <a href="<?= APPURL ?>/reg">Регістрація</a>
@@ -22,4 +23,3 @@
         </div>
     </header>
     <main class="container">
-

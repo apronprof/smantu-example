@@ -15,7 +15,7 @@ function migrate(){
 
 function rollback(){
     $files = scandir('db/Migrations/');
-        foreach($files as $file){
+        foreach(array_reverse($files) as $file){
             if($file == '.' || $file == '..' || explode('.', $file)[0] == '') continue;
             $class = 'DB\\Migrations\\'.str_replace(['_', '.php'], '', $file);
             $obj = new $class;

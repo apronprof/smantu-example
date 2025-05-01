@@ -8,8 +8,11 @@ require(__DIR__ . '/vendor/autoload.php');
 use Core\Classes\DB;
 use Core\Classes\QueryBuilder;
 
-foreach (array_reverse(glob(__DIR__ . '/db/Migrations/*.php')) as $file) {
-    require_once $file;
+$files = scandir(__DIR__ . '/db/Migrations/');
+
+foreach ($files as $file) {
+    if($file != "." && $file != "..")
+        require_once(__DIR__ . '/db/Migrations/' . $file);
 }
 
 $db = new DB($config['db']);
