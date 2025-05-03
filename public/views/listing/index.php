@@ -4,11 +4,12 @@
 <?php foreach($data as $house): ?>
     <div class="listing">
         <h3><?= $house['property_name']?></h3>
-        <p><strong>City:</strong> London</p>
         <p><strong>Ціна:</strong><?= $house['price']?></p>
-        <p><strong>Тип житла:</strong><?= $house['property_type']?></p>
         <p><strong>Індекс:</strong><?= $house['postcode']?></p>
         <p><strong>Кількість кімнат:</strong><?= $house['num_rooms']?></p>
+        <p><strong>Площа:</strong><?= $house['area']?></p>
+        <p><strong>Поверх:</strong><?= $house['floor']?></p>
+
         <a href="<?= APPURL . "/listing/" . $house['house_id']?>">Більше</a>
     </div>
     <br />

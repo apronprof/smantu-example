@@ -1,12 +1,14 @@
 <?php require(PUB . 'views/header.php') ?>
 <h2><?= $house['property_name']?></h2>
 <ul>
-        <p><strong>City:</strong> London</p>
         <p><strong>Ціна:</strong><?= $house['price']?></p>
-        <p><strong>Тип житла:</strong><?= $house['property_type']?></p>
         <p><strong>Індекс:</strong><?= $house['postcode']?></p>
         <p><strong>Кількість кімнат:</strong><?= $house['num_rooms']?></p>
+        <p><strong>Площа:</strong><?= $house['area']?></p>
+        <p><strong>Поверх:</strong><?= $house['floor']?></p>
+
         <p><strong><strong><a href="<?= APPURL . "/user/" . $house['username'] ?>"></strong><?= $house['username'] ?></a></p>
+        
 
 </ul>
 <?php if(isset($_SESSION['user']) && $_SESSION['user'] == $house['username']): ?>

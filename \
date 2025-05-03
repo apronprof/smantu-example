@@ -102,8 +102,8 @@ class ListingController extends Controller
         $area = $post['area'];
         $floor = $post['floor'];
 
-        $stmt = House::prepare("INSERT INTO houses VALUES(null, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$house_name, floatval($price), $postcode, $rooms, floatval($area), $floor, $user_id]);
+        $stmt = House::prepare("INSERT INTO houses VALUES(null, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$house_name, floatval($price), $postcode, $rooms, $area, $floor, $user_id]);
 
         $response = $this->response(302);
         $response = $response->withHeader("Location", APPURL . "/listing/dashboard");
@@ -152,7 +152,7 @@ class ListingController extends Controller
         $floor = $post['floor'];
 
         $stmt = House::prepare("UPDATE houses SET property_name = ?, price = ?, postcode = ?, num_rooms = ?, area = ?, floor = ? WHERE id = ? AND user_id = ?");
-        $stmt->execute([$house_name, floatval($price), $postcode, $rooms, floatval($area), $floor, $house_id, $user_id]);
+        $stmt->execute([$house_name, floatval($price), $postcode, $rooms, $area, $floor, $user_id]);
         $response = $this->response(302);
         $response = $response->withHeader("Location", APPURL . "/listing/" . $house_id);
         return $response;
