@@ -1,6 +1,6 @@
 <?php require(PUB . 'views/header.php') ?>
 
-<h2>Регистрация</h2>
+<h2>Регiстрацiя</h2>
 <form method="POST" action="<?= APPURL  ?>/reg">
     <label>Username: <input type="text" name="username" required></label><br>
     <label>Ім'я': <input type="text" name="name" required></label><br>
