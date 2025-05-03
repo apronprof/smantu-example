@@ -2,6 +2,7 @@
 <h2><?= $house['property_name']?></h2>
 <ul>
         <p><strong>Ціна:</strong><?= $house['price']?></p>
+        <p><strong>Риночна ціна:</strong><?= $predict ?></p>
         <p><strong>Індекс:</strong><?= $house['postcode']?></p>
         <p><strong>Кількість кімнат:</strong><?= $house['num_rooms']?></p>
         <p><strong>Площа:</strong><?= $house['area']?></p>

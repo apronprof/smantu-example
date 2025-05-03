@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use \App\Models\User;
 use \App\Models\House;
+use \Core\Classes\MLService;
 
 class ListingController extends Controller
 {
@@ -28,7 +29,9 @@ class ListingController extends Controller
 ");
         $stmt->execute([$request->getAttribute('id')]);
         $data = $stmt->fetch(\PDO::FETCH_ASSOC);
-        return $this->view('listing/show', ['house' => $data]);
+        $mlmodel = new MLService('cost');
+        $predict = $mlmodel->predict([[$data['area'], $data['num_rooms'], $data['floor']]])[0];
+        return $this->view('listing/show', ['house' => $data, 'predict' => intval($predict)]);
     }
 
     public function userStore($request){
